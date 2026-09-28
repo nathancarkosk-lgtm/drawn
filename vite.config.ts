@@ -146,10 +146,14 @@ function authPopupPlugin(): Plugin {
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
 export default defineConfig(({ command, isPreview }) => ({
+  // Set BASE_PATH=/drawn/ for GitHub Pages project site.
+  base: process.env.BASE_PATH || "/",
   server: {
     host: "0.0.0.0",
     port: 8080,
     strictPort: true,
+    // Public tunnels (tunnelmole/cloudflared) hit Vite's host check.
+    allowedHosts: true,
   },
   preview: {
     host: "127.0.0.1",
@@ -166,7 +170,9 @@ export default defineConfig(({ command, isPreview }) => ({
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
     grokPwaPlugin(),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      spa: { enabled: true },
+    }),
     ...(command === "build" || isPreview
       ? [
           nitro({

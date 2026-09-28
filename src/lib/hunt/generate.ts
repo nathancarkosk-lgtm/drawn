@@ -1,4 +1,3 @@
-import { createServerFn } from "@tanstack/react-start";
 import { blazeFor } from "./blaze";
 import { pickExperts, namesWrongQuarry } from "./experts";
 import { fuelFor } from "./fuel";
@@ -45,7 +44,11 @@ async function enhanceWithLlm(args: {
   openQuestions?: string[];
   itemWhy?: Record<string, string>;
 } | null> {
-  const apiKey = process.env.XAI_API_KEY;
+  const apiKey =
+    (typeof process !== "undefined" ? process.env.XAI_API_KEY : undefined) ||
+    (typeof import.meta !== "undefined"
+      ? (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_XAI_API_KEY
+      : undefined);
   if (!apiKey) return null;
 
   const compactRows = args.rows.map((r) => ({
@@ -273,13 +276,14 @@ function defaultMistakes(input: HuntInput, d: Derived): string[] {
   return m.slice(0, input.experience === "beginner" ? 6 : input.experience === "intermediate" ? 3 : 2);
 }
 
-export const generatePlan = createServerFn({ method: "POST" })
-  .validator((input: unknown) => {
-    const normalized = asHuntInput(input);
-    if (!normalized) throw new Error("Complete every hunt field before generating.");
-    return normalized;
-  })
-  .handler(async ({ data: input }): Promise<{ ok: true; plan: HuntPlan } | { ok: false; error: string }> => {
+/** Client-safe kit builder (no server required). Call as generatePlan({ data: input }). */
+export async function generatePlan({
+  data: inputRaw,
+}: {
+  data: unknown;
+}): Promise<{ ok: true; plan: HuntPlan } | { ok: false; error: string }> {
+    const input = asHuntInput(inputRaw);
+    if (!input) throw new Error("Complete every hunt field before generating.");
     const region = regionById(input.regionId);
     if (!region || region.state !== input.state) {
       return { ok: false, error: "Pick a region that belongs to that state." };
@@ -391,4 +395,4 @@ export const generatePlan = createServerFn({ method: "POST" })
     };
 
     return { ok: true, plan };
-  });
+}
