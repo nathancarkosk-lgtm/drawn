@@ -2,7 +2,6 @@
 
 Hunt-specific gear kits. Pick the animal, place, season, and how you hunt — get a list you can take into the field.
 
-Drawn is free and non-commercial: no affiliates, tip jars, or paid upsells.
 
 ## Run it
 

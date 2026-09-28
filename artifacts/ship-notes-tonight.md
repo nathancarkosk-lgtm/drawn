@@ -14,7 +14,7 @@
    - inReach/comm + harness (+ haul packs, lifeline) theaters `any`
    - `standLikeAmbush` derive gate + buildSkipped coverage (“No sourced option…”)
 3. Polish: beginner why (SLOT_PLAIN), skip list in feed + packing export, `#kit=` share, analytics events, mobile overflow, safety notice.
-4. Free/non-commercial: kits stay free; `shop_click` is a neutral shop convenience event; ranking by score/fit only; Amazon links are plain search (no tag=).
+4. Amazon links are plain search (no affiliate tags); ranking by score/fit only.
 5. Brand stays **Drawn**.
 6. 5k audit seed 42 → **0% P0 flags**.
 
