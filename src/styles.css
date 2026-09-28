@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #121410;
+  --color-surface: #1a1c18;
+  --color-surface-2: #23261f;
+  --color-fg: #efece3;
+  --color-muted: #9b9688;
+  --color-subtle: #6f6b60;
+  --color-primary: #a8b59a;
+  --color-primary-fg: #121410;
+  --color-accent: #c5c9be;
+  --color-border: #2c3028;
+  --color-border-strong: #3d4338;
+  --color-danger: #c45c4a;
+  --color-warn: #c4a35a;
+
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+@layer base {
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01" on, "cv11" on;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button,
+  a,
+  summary,
+  label,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: color-mix(in oklab, var(--color-primary) 22%, transparent);
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 40%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+.app-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.topo-grid {
+  background-image:
+    radial-gradient(ellipse at 20% -10%, color-mix(in oklab, var(--color-primary) 14%, transparent), transparent 42%),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-fg) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to right, color-mix(in oklab, var(--color-fg) 4%, transparent) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+  background-position: center top, 0 0, 0 0;
+}
+
+.feed-enter {
+  animation: feed-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes feed-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed-enter {
+    animation: none;
+  }
+}
+
+.pack-box {
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.pack-box:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%23121410' stroke-width='2.2' d='M3 8.2 6.4 11.5 13 4.5'/></svg>");
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pack-empty {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: 3px;
+}
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.55in;
+  }
+
+  html,
+  body,
+  #app {
+    background: #fff !important;
+    color: #1a1714 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  a[href]:after {
+    content: none !important;
+  }
+
+  button {
+    color: inherit !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .print-root {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .pack-sheet h1 {
+    font-size: 22px;
+    color: #1a1714;
+  }
+
+  .pack-sheet .text-primary {
+    color: #4a5544 !important;
+  }
+
+  .pack-sheet .text-muted,
+  .pack-sheet .text-subtle {
+    color: #5c574c !important;
+  }
+
+  .pack-sheet .bg-surface-2 {
+    background: #f3f0e8 !important;
+    color: #1a1714 !important;
+  }
+
+  .pack-sheet .border-border,
+  .pack-sheet .border-border\/80 {
+    border-color: #cfc8b8 !important;
+  }
+
+  .pack-group {
+    break-inside: avoid;
+  }
+
+  .pack-sheet ul {
+    column-count: 2;
+    column-gap: 28px;
+  }
+
+  .pack-sheet li {
+    break-inside: avoid;
+  }
+
+  .pack-sheet .min-h-11 {
+    min-height: 0;
+  }
+
+  .pack-box,
+  .pack-empty {
+    width: 12px;
+    height: 12px;
+    border-color: #1a1714;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .pack-box:checked {
+    background-color: #1a1714;
+    border-color: #1a1714;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%23ffffff' stroke-width='2.2' d='M3 8.2 6.4 11.5 13 4.5'/></svg>");
+  }
+}

@@ -1,0 +1,43 @@
+Sampling 5000 unique-ish HuntInputs (seed=42)…
+Got 5000 inputs. Generating kits…
+  … 500/5000 (ok=500 err=0)
+  … 1000/5000 (ok=1000 err=0)
+  … 1500/5000 (ok=1500 err=0)
+  … 2000/5000 (ok=2000 err=0)
+  … 2500/5000 (ok=2500 err=0)
+  … 3000/5000 (ok=3000 err=0)
+  … 3500/5000 (ok=3500 err=0)
+  … 4000/5000 (ok=4000 err=0)
+  … 4500/5000 (ok=4500 err=0)
+  … 5000/5000 (ok=5000 err=0)
+Wrote /workspace/drawn-gear/artifacts/batch-kit-audit.json
+Wrote /workspace/drawn-gear/artifacts/batch-kit-audit.md
+{
+  "kitsGenerated": 5000,
+  "errors": 0,
+  "kitsWithAnyFlag": 290,
+  "topFlags": [
+    {
+      "flag": "remote_comm_not_derived",
+      "count": 163,
+      "ratePct": 3.26
+    },
+    {
+      "flag": "alaska_or_remote_missing_comm",
+      "count": 90,
+      "ratePct": 1.8
+    },
+    {
+      "flag": "bear_country_spray_not_derived",
+      "count": 80,
+      "ratePct": 1.6
+    },
+    {
+      "flag": "ambush_missing_harness",
+      "count": 47,
+      "ratePct": 0.94
+    }
+  ],
+  "json": "/workspace/drawn-gear/artifacts/batch-kit-audit.json",
+  "md": "/workspace/drawn-gear/artifacts/batch-kit-audit.md"
+}

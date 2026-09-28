@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "generatedAt": "2026-09-19T01:51:31.361Z",
+    "target": 5000,
+    "seed": 42,
+    "elapsedMs": 2250,
+    "pipeline": "derive + buildRows + buildSkipped + fallbackWeather (no LLM, no NASA weather)",
+    "note": "Flags are heuristic usefulness/accuracy red flags against local kit rules — not legal advice or invented regulations."
+  },
+  "totals": {
+    "sampledInputs": 5000,
+    "kitsGenerated": 5000,
+    "errors": 0,
+    "avgRowCount": 33.38,
+    "uniqueFlagTypes": 0,
+    "kitsWithAnyFlag": 0,
+    "kitsClean": 5000,
+    "anyFlagRatePct": 0
+  },
+  "flagCounts": [],
+  "representativeFailingCases": [],
+  "errorSamples": [],
+  "usefulnessNotes": [
+    "Generated 5000 kits from 5000 stratified season-valid inputs in 2.3s (seed 42).",
+    "No heuristic red flags fired across the sample — kit derive/buildRows look consistent with coded rules.",
+    "Multi-day backpack hunts did not select Pro 2300 / ALPS / Superday / Pop-Up day packs as the primary pack in this sample (haul preference held).",
+    "Ambush tactics consistently included a fall-arrest harness slot when derived.",
+    "When blazeFor().required was true, blaze vest/hat rows were present in kits.",
+    "Beginner why-text generally includes plain role language (SLOT_PLAIN path), not jargon-only builtFor.",
+    "Skipped lists were checked for non-ambush tactics (expect harness/seat omissions explained). Catalog gaps (derived slot, no product) are product-coverage issues, not regulations.",
+    "This audit does not invent legal regulations; blaze/season checks only mirror blaze.ts and seasons.ts snapshots already in the app."
+  ]
+}
